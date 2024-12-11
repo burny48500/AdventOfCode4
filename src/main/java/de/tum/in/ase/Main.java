@@ -7,10 +7,9 @@ import java.io.FileNotFoundException;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        File input = new File("/Users/urkocornejo/Library/CloudStorage/OneDrive-TUM/IdeaProjects" +
-                "/Personal/AdventOfCode/AdventOfCode4/src/main/resources/input.txt");
-        File test = new File("/Users/urkocornejo/Library/CloudStorage/OneDrive-TUM/IdeaProjects/" +
-                "Personal/AdventOfCode/AdventOfCode4/src/main/resources/test.txt");
+        //Change Path to Absolute Path
+        File input = new File("resources/input.txt");
+        File test = new File("resources/test.txt");
 
         Finder finder = new Finder();
         int total = finder.getFinder(input);

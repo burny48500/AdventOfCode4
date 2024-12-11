@@ -23,15 +23,14 @@ public class Finder {
             verticalList.add(horizontalList);
         }
 
-
-        int total = lToR(verticalList, horizontalList) + rTol(verticalList, horizontalList) +
+        /*int total = lToR(verticalList, horizontalList) + rTol(verticalList, horizontalList) +
                 upDown(verticalList, horizontalList) + downUp(verticalList, horizontalList) +
                 lToRUpDown(verticalList, horizontalList) + rToLUpDown(verticalList, horizontalList) +
                 lToRDownUp(verticalList, horizontalList) + rToLDownUp(verticalList, horizontalList);
-        return total;
+         */
+        return xMAS(verticalList, horizontalList);
     }
 
-    //Works
     private int lToR(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = 0; i < verticalList.size(); i++) {
@@ -44,7 +43,7 @@ public class Finder {
         }
         return counter;
     }
-    //Works
+
     private int rTol(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = 0; i < verticalList.size(); i++) {
@@ -58,8 +57,6 @@ public class Finder {
         return counter;
     }
 
-
-    //WORKS
     private int upDown(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = 0; i < verticalList.size()-3; i++) {
@@ -73,7 +70,6 @@ public class Finder {
         return counter;
     }
 
-    //WORKS
     private int downUp(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = verticalList.size()-1; i > 2; i--) {
@@ -87,7 +83,6 @@ public class Finder {
         return counter;
     }
 
-    //NOT
     private int lToRUpDown(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = 0; i < verticalList.size(); i++) {
@@ -105,6 +100,7 @@ public class Finder {
         }
         return counter;
     }
+
     private int rToLUpDown(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = 0; i < verticalList.size(); i++) {
@@ -120,6 +116,7 @@ public class Finder {
         }
         return counter;
     }
+
     private int lToRDownUp(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = verticalList.size()-1; i > -1; i--) {
@@ -135,6 +132,7 @@ public class Finder {
         }
         return counter;
     }
+
     private int rToLDownUp(List<List<String>> verticalList, List<String> horizontalList) {
         int counter = 0;
         for (int i = verticalList.size()-1; i > -1; i--) {
@@ -145,6 +143,32 @@ public class Finder {
                 if (verticalList.get(i).get(j).equals("X") && verticalList.get(i-1).get(j-1).equals("M") &&
                         verticalList.get(i-2).get(j-2).equals("A") && verticalList.get(i-3).get(j-3).equals("S")) {
                     counter++;
+                }
+            }
+        }
+        return counter;
+    }
+
+
+    private int xMAS(List<List<String>> verticalList, List<String> horizontalList) {
+        int counter = 0;
+        for (int i = 0; i < verticalList.size(); i++) {
+            for (int j = 0; j < horizontalList.size(); j++) {
+                if ((i+1 > verticalList.size()-1) || (j+1 > horizontalList.size()-1) || (i-1 < 0) || (j-1 < 0)) {
+
+                    continue;
+                }
+                if (verticalList.get(i).get(j).equals("A")) {
+                    if ((verticalList.get(i-1).get(j-1).equals("M") && verticalList.get(i+1).get(j+1).equals("S") &&
+                            ((verticalList.get(i+1).get(j-1).equals("M") && verticalList.get(i-1).get(j+1).equals("S")) ||
+                            (verticalList.get(i-1).get(j+1).equals("M") && verticalList.get(i+1).get(j-1).equals("S")))) ||
+
+                            (verticalList.get(i+1).get(j+1).equals("M") && verticalList.get(i-1).get(j-1).equals("S") &&
+                                    ((verticalList.get(i+1).get(j-1).equals("M") && verticalList.get(i-1).get(j+1).equals("S")) ||
+                                            (verticalList.get(i-1).get(j+1).equals("M") && verticalList.get(i+1).get(j-1).equals("S"))))
+                    ) {
+                        counter++;
+                    }
                 }
             }
         }
